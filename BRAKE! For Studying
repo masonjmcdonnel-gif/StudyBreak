@@ -1,0 +1,53 @@
+// --- StudyBreak Website Hub ---
+// Now includes routing so you can visit it at a functional link
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+const REAL_GAMES = [
+  { id: 'block_blast', name: 'Block Blast', url: 'https://block-blast.io/' },
+  { id: 'krunker', name: 'Krunker', url: 'https://krunker.io/' },
+  { id: 'slither', name: 'Slither.io', url: 'https://slither.io/' },
+  { id: '2048', name: '2048', url: 'https://play2048.co/' },
+  { id: 'chess', name: 'Online Chess', url: 'https://www.chess.com/play' },
+  { id: 'tetris', name: 'Tetris', url: 'https://tetris.com/play-tetris' },
+];
+
+function HomePage() {
+  return (
+    <div className="min-h-screen bg-slate-950 p-6 text-white">
+      <h1 className="text-4xl font-bold mb-6 text-center">StudyBreak</h1>
+      <p className="text-center mb-6 opacity-80">A safe place to take a break — games and browsing in one place</p>
+      <Card className="max-w-2xl mx-auto">
+        <CardHeader>
+          <CardTitle>Games</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea className="h-80 border rounded p-2">
+            {REAL_GAMES.map(g => (
+              <div key={g.id} className="mb-3 p-2 border rounded flex justify-between items-center bg-slate-900">
+                <div className="text-slate-100 font-semibold">{g.name}</div>
+                <Button asChild>
+                  <a href={g.url} target="_blank" rel="noopener noreferrer">Play</a>
+                </Button>
+              </div>
+            ))}
+          </ScrollArea>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </Router>
+  );
+}
